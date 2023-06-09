@@ -1,0 +1,46 @@
+--계정생성
+CREATE USER JSP IDENTIFIED BY JSP;
+--권한부여
+GRANT RESOURCE, CONNECT TO JSP;
+--
+
+ALTER USER JSP DEFAULT TABLESPACE USERS QUOTA UNLIMITED ON USERS;
+
+CREATE TABLE USERS (
+    ID VARCHAR2(30),
+    PW VARCHAR2(30) NOT NULL,
+    NAME VARCHAR2(30) NOT NULL,
+    EMAIL VARCHAR2(30),
+    GENDER CHAR(1),
+    REGDATE DATE DEFAULT SYSDATE
+ ); 
+ 
+ COMMIT;
+ 
+ SELECT * FROM USERS WHERE ID = '값';
+ 
+ ALTER TABLE USERS ADD CONSTRAINT USERS_PK PRIMARY KEY (ID);
+ ALTER TABLE USERS ADD CONSTRAINT USERS_CHECK CHECK(GENDER IN ('M','F'));
+ 
+ SELECT * FROM USERS;
+ 
+ INSERT INTO USERS(ID, PW, NAME, EMAIL, GENDER) VALUES (?, ?, ?, ?, ?);
+ 
+ SELECT * FROM USERS WHERE ID =? AND PW =?;
+ 
+ select * from users;
+  
+update users set pw = ?, email = ? where id = ?;
+
+create table board (
+    bno number(10),
+    writer varchar2(30) not null,
+    title varchar2(50) not NULL,
+    content varchar2(1000),
+    hit number(5) default 0,
+    regdate date default sysdate
+);
+
+alter table board add constraint board_pk primary key (bno);
+
+create sequence board_seq nocache;
